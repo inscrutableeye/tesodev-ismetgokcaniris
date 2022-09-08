@@ -1,9 +1,11 @@
+import { IconButton, Flex , Image, Text, Box, LinkBox, LinkOverlay } from '@chakra-ui/react'
+
 import React from 'react'
-import { Box, Flex, IconButton, useBreakpointValue } from '@chakra-ui/react'
+
 // Here we have used react-icons package for the icons
 import { BiLeftArrowAlt, BiRightArrowAlt } from 'react-icons/bi'
 // And react-slick as our Carousel Lib
-import Slider from 'react-slick'
+import Slider from "react-slick"
 
 // Settings for the slider
 const settings = {
@@ -14,9 +16,84 @@ const settings = {
   autoplay: true,
   speed: 500,
   autoplaySpeed: 5000,
-  slidesToShow: 1,
-  slidesToScroll: 1
+  slidesToShow: 3,
+  slidesToScroll: 3,
+  responsive: [
+    {
+      breakpoint: 2500,
+      settings: {
+        slidesToShow: 3,
+        slidesToScroll: 3,
+        infinite: true,
+        dots: true,
+      },
+    },
+    {
+      breakpoint: 1024,
+      settings: {
+        slidesToShow: 2,
+        slidesToScroll: 3,
+        infinite: true,
+        dots: true,
+      },
+    },
+    {
+      breakpoint: 768,
+      settings: {
+        slidesToShow: 2,
+        slidesToScroll: 2,
+        initialSlide: 2,
+      },
+    },
+    {
+      breakpoint: 480,
+      settings: {
+        slidesToShow: 1,
+        slidesToScroll: 1,
+      },
+    },
+  ],
 }
+
+
+const cards: Array<{
+  image:String,
+  desc:string,
+  desc2:string,
+  date:string
+}> = [
+  {
+    image: "image.png",
+    desc:"A Plan to Rebuild the Bus Terminal",
+        desc2:"Everyone Loves to Hate",
+        date:"1h ago · by Troy Corlson"
+  },  {
+    image: "image.png",
+    desc:"A Plan to Rebuild the Bus Terminal ",
+    desc2:"Everyone Loves to Hate",
+    date:"1h ago · by Troy Corlson"
+  },  {
+    image: "image.png",
+    desc:"A Plan to Rebuild the Bus Terminal ",
+    desc2:"Everyone Loves to Hate",
+    date:"1h ago · by Troy Corlson"
+  },  {
+    image: "image.png",
+    desc:"A Plan to Rebuild the Bus Terminal ",
+    desc2:"Everyone Loves to Hate",
+    date:"1h ago · by Troy Corlson"
+  },  {
+    image: "image.png",
+    desc:"A Plan to Rebuild the Bus Terminal",
+    desc2:"Everyone Loves to Hate",
+    date:"1h ago · by Troy Corlson"
+  },  {
+    image: "image.png",
+    desc:"A Plan to Rebuild the Bus Terminal",
+    desc2:"Everyone Loves to Hate",
+    date:"1h ago · by Troy Corlson"
+  }
+]
 
 export default function Carousel () {
   // As we have used custom buttons, we need a reference variable to
@@ -27,23 +104,19 @@ export default function Carousel () {
   // buttons as the screen size changes
 
   // These are the images used in the slide
-  const cards = [
-    '../../public/image.png',
-    'https://images.unsplash.com/photo-1627875764093-315831ac12f7?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1yZWxhdGVkfDJ8fHxlbnwwfHx8fA%3D%3D&auto=format&fit=crop&w=900&q=60',
-    'https://images.unsplash.com/photo-1571432248690-7fd6980a1ae2?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1yZWxhdGVkfDl8fHxlbnwwfHx8fA%3D%3D&auto=format&fit=crop&w=900&q=60'
-  ]
+
 
   return (
     <>
       <Box
         display='flex'
         flexDirection={'row'}
-        justifyContent={'space-between'}
-        background={
-          'background: linear-gradient(180deg, #000000 10.61%, rgba(0, 0, 0, 0) 100%);'
-        }
+        justifyContent={{base:"center",lg:'space-between'}}
+        mt={"-5%"}
+        ml={{base:"100px", lg:"0"}}
+     
       >
-        {/* CSS files for react-slick */}
+     
         <link
           rel='stylesheet'
           type='text/css'
@@ -60,8 +133,9 @@ export default function Carousel () {
           aria-label='left-arrow'
           colorScheme='messenger'
           borderRadius='full'
-          transform={'translate(0%, -50%)'}
+          transform={{base:"",lg:'translate(0%, 525%)'}}
           onClick={() => slider?.slickPrev()}
+          zIndex={2}
         >
           <BiLeftArrowAlt />
         </IconButton>
@@ -71,23 +145,43 @@ export default function Carousel () {
           aria-label='right-arrow'
           colorScheme='messenger'
           borderRadius='full'
-          transform={'translate(0%, -50%)'}
+          transform={{base:"",lg:'translate(0%, 525%)'}}
           onClick={() => slider?.slickNext()}
+          zIndex={2}
         >
           <BiRightArrowAlt />
         </IconButton>
         {/* Slider */}
       </Box>
-      <Slider {...settings} ref={slider => setSlider(slider)}>
-        {cards.map((url, index) => (
-          <Box
-            key={index}
-            height={'2xl'}
-            backgroundPosition='center'
-            backgroundRepeat='no-repeat'
-            backgroundSize='contain'
-            backgroundImage={`url(${url})`}
-          />
+      <Slider {...settings} ref={slider => setSlider(slider)}  >
+        {cards.map((val, index) => (
+           
+          <Flex
+ 
+          key={index}
+          alignItems="center"
+          justifyContent={{base:"center",lg:"flex-start"}}
+          flexDirection={"column"}
+          ml={{base:"0%",lg:"5%"}}
+          pl={{base:"100px" , lg:""}}
+         
+        
+
+          >
+            <LinkBox as='article' maxW='sm' p='5'  borderWidth='1px' rounded='md' _hover={{
+              borderColor:"black"
+            }} >
+            <LinkOverlay href='#'>
+    
+   
+            <Image src={val.image}/>
+          
+            <Text textColor={"#090A0A"}>{val.desc}</Text>
+            <Text textColor={"#090A0A"}>{val.desc2}</Text>
+            <Text  textColor={"gray.400"}>{val.date}</Text>
+            </LinkOverlay>
+            </LinkBox>
+          </Flex>
         ))}
       </Slider>
     </>

@@ -13,13 +13,13 @@ import { PhoneIcon, CheckIcon, SearchIcon } from '@chakra-ui/icons'
 import TopNews from '../src/components/TopNews'
 const Home: NextPage = () => {
   return (
-    <Flex flexDirection={'column'}>
-      <Flex alignItems={'flex-end'} justifyContent='flex-end'>
+    <>
+      <Flex alignItems={{base:"center", lg:'flex-end'}} justifyContent={{base:"center",lg:'flex-end'}}>
         <Button>Add New Record</Button>
       </Flex>
       <Flex
         alignItems={'center'}
-        justifyContent={'space-around'}
+        justifyContent={{base:"center", md:'space-around'}}
         flexDirection={'column'}
       >
         <Image src='tesodevicon.png' />
@@ -33,17 +33,17 @@ const Home: NextPage = () => {
         </Text>
         <Flex
           alignItems={'center'}
-          justifyContent='space-around'
+          justifyContent={{base:"center", lg:'space-around'}}
           flexDirection={'row'}
           mt={'-50px'}
-          ml={'15%'}
+          ml={ {base:"40%",lg:'15%'}}
         >
           <InputGroup>
             <InputLeftElement color='gray.400' pointerEvents='none'>
               <SearchIcon color={'gray.300'} mt='2' />
             </InputLeftElement>
             <Input
-              w={'640px'}
+              w={{base:"300px", lg:'640px'}}
               placeholder='Search'
               fontSize={'10pt'}
               _placeholder={{ color: 'gray.500' }}
@@ -70,7 +70,7 @@ const Home: NextPage = () => {
         </Flex>
       </Flex>
       <TopNews />
-    </Flex>
+    </>
   )
 }
 
