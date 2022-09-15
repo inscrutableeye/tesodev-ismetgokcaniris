@@ -9,29 +9,25 @@ import {
   InputGroup,
   useDisclosure,
   Collapse,
-  Link
+  Link,
+  LinkOverlay
 } from '@chakra-ui/react'
 import { NextPage } from 'next'
 import { PhoneIcon, CheckIcon, SearchIcon } from '@chakra-ui/icons'
 import TopNews from '../src/components/TopNews'
-import { text } from 'stream/consumers'
-import { useState } from 'react'
-import { useNavigate } from 'react-router-dom'
+import React, { useEffect, useState } from 'react'
+import { Route, Routes } from 'react-router'
+
 const Home: NextPage = () => {
-  const { isOpen, onToggle } = useDisclosure()
-  const [value, setValue] = useState()
-  const navigate = useNavigate()
-  const navigateRecord = () => {
-    // 👇️ navigate to /
-    navigate('/Record')
-  }
   return (
     <>
       <Flex
         alignItems={{ base: 'center', lg: 'flex-end' }}
         justifyContent={{ base: 'center', lg: 'flex-end' }}
       >
-        <Button onClick={navigateRecord}>Add New Record</Button>
+        <Link href='/Record'>
+          <Button>Add New Record</Button>
+        </Link>
       </Flex>
       <Flex
         alignItems={'center'}
@@ -59,8 +55,6 @@ const Home: NextPage = () => {
               <SearchIcon color={'gray.300'} mt='2' />
             </InputLeftElement>
             <Input
-              value={value}
-              onClick={onToggle}
               w={{ base: '300px', lg: '640px' }}
               placeholder='Search'
               fontSize={'10pt'}
@@ -87,21 +81,8 @@ const Home: NextPage = () => {
             </Text>
           </Button>
         </Flex>
-        <Collapse in={isOpen} animateOpacity>
-          <Box
-            p='40px'
-            color='white'
-            mt='4'
-            bg='#FFFFFF'
-            borderRadius={'24px'}
-            shadow='md'
-            textColor={'black'}
-            border={'1px solid black'}
-          >
-            asdasdsd
-          </Box>
-        </Collapse>
       </Flex>
+
       <TopNews />
     </>
   )

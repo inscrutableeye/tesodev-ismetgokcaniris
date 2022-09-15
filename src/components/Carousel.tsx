@@ -1,11 +1,19 @@
-import { IconButton, Flex , Image, Text, Box, LinkBox, LinkOverlay } from '@chakra-ui/react'
+import {
+  IconButton,
+  Flex,
+  Image,
+  Text,
+  Box,
+  LinkBox,
+  LinkOverlay
+} from '@chakra-ui/react'
 
 import React from 'react'
 
 // Here we have used react-icons package for the icons
 import { BiLeftArrowAlt, BiRightArrowAlt } from 'react-icons/bi'
 // And react-slick as our Carousel Lib
-import Slider from "react-slick"
+import Slider from 'react-slick'
 
 // Settings for the slider
 const settings = {
@@ -22,11 +30,11 @@ const settings = {
     {
       breakpoint: 2500,
       settings: {
-        slidesToShow: 3,
-        slidesToScroll: 3,
+        slidesToShow: 2,
+        slidesToScroll: 2,
         infinite: true,
-        dots: true,
-      },
+        dots: true
+      }
     },
     {
       breakpoint: 1024,
@@ -34,64 +42,68 @@ const settings = {
         slidesToShow: 2,
         slidesToScroll: 3,
         infinite: true,
-        dots: true,
-      },
+        dots: true
+      }
     },
     {
       breakpoint: 768,
       settings: {
         slidesToShow: 2,
         slidesToScroll: 2,
-        initialSlide: 2,
-      },
+        initialSlide: 2
+      }
     },
     {
       breakpoint: 480,
       settings: {
         slidesToShow: 1,
-        slidesToScroll: 1,
-      },
-    },
-  ],
+        slidesToScroll: 1
+      }
+    }
+  ]
 }
 
-
 const cards: Array<{
-  image:String,
-  desc:string,
-  desc2:string,
-  date:string
+  image: String
+  desc: string
+  desc2: string
+  date: string
 }> = [
   {
-    image: "image.png",
-    desc:"A Plan to Rebuild the Bus Terminal",
-        desc2:"Everyone Loves to Hate",
-        date:"1h ago · by Troy Corlson"
-  },  {
-    image: "image.png",
-    desc:"A Plan to Rebuild the Bus Terminal ",
-    desc2:"Everyone Loves to Hate",
-    date:"1h ago · by Troy Corlson"
-  },  {
-    image: "image.png",
-    desc:"A Plan to Rebuild the Bus Terminal ",
-    desc2:"Everyone Loves to Hate",
-    date:"1h ago · by Troy Corlson"
-  },  {
-    image: "image.png",
-    desc:"A Plan to Rebuild the Bus Terminal ",
-    desc2:"Everyone Loves to Hate",
-    date:"1h ago · by Troy Corlson"
-  },  {
-    image: "image.png",
-    desc:"A Plan to Rebuild the Bus Terminal",
-    desc2:"Everyone Loves to Hate",
-    date:"1h ago · by Troy Corlson"
-  },  {
-    image: "image.png",
-    desc:"A Plan to Rebuild the Bus Terminal",
-    desc2:"Everyone Loves to Hate",
-    date:"1h ago · by Troy Corlson"
+    image: 'image.png',
+    desc: 'A Plan to Rebuild the Bus Terminal',
+    desc2: 'Everyone Loves to Hate',
+    date: '1h ago · by Troy Corlson'
+  },
+  {
+    image: 'image.png',
+    desc: 'A Plan to Rebuild the Bus Terminal ',
+    desc2: 'Everyone Loves to Hate',
+    date: '1h ago · by Troy Corlson'
+  },
+  {
+    image: 'image.png',
+    desc: 'A Plan to Rebuild the Bus Terminal ',
+    desc2: 'Everyone Loves to Hate',
+    date: '1h ago · by Troy Corlson'
+  },
+  {
+    image: 'image.png',
+    desc: 'A Plan to Rebuild the Bus Terminal ',
+    desc2: 'Everyone Loves to Hate',
+    date: '1h ago · by Troy Corlson'
+  },
+  {
+    image: 'image.png',
+    desc: 'A Plan to Rebuild the Bus Terminal',
+    desc2: 'Everyone Loves to Hate',
+    date: '1h ago · by Troy Corlson'
+  },
+  {
+    image: 'image.png',
+    desc: 'A Plan to Rebuild the Bus Terminal',
+    desc2: 'Everyone Loves to Hate',
+    date: '1h ago · by Troy Corlson'
   }
 ]
 
@@ -105,18 +117,15 @@ export default function Carousel () {
 
   // These are the images used in the slide
 
-
   return (
     <>
       <Box
         display='flex'
         flexDirection={'row'}
-        justifyContent={{base:"center",lg:'space-between'}}
-        mt={"-5%"}
-        ml={{base:"100px", lg:"0"}}
-     
+        justifyContent={{ base: 'center', lg: 'space-between' }}
+        mt={'-5%'}
+        ml={{ base: '100px', lg: '0' }}
       >
-     
         <link
           rel='stylesheet'
           type='text/css'
@@ -133,7 +142,7 @@ export default function Carousel () {
           aria-label='left-arrow'
           colorScheme='messenger'
           borderRadius='full'
-          transform={{base:"",lg:'translate(0%, 525%)'}}
+          transform={{ base: '', lg: 'translate(0%, 525%)' }}
           onClick={() => slider?.slickPrev()}
           zIndex={2}
         >
@@ -145,7 +154,7 @@ export default function Carousel () {
           aria-label='right-arrow'
           colorScheme='messenger'
           borderRadius='full'
-          transform={{base:"",lg:'translate(0%, 525%)'}}
+          transform={{ base: '', lg: 'translate(0%, 525%)' }}
           onClick={() => slider?.slickNext()}
           zIndex={2}
         >
@@ -153,33 +162,33 @@ export default function Carousel () {
         </IconButton>
         {/* Slider */}
       </Box>
-      <Slider {...settings} ref={slider => setSlider(slider)}  >
+      <Slider {...settings} ref={slider => setSlider(slider)}>
         {cards.map((val, index) => (
-           
           <Flex
- 
-          key={index}
-          alignItems="center"
-          justifyContent={{base:"center",lg:"flex-start"}}
-          flexDirection={"column"}
-          ml={{base:"0%",lg:"5%"}}
-          pl={{base:"100px" , lg:""}}
-         
-        
-
+            key={index}
+            alignItems='center'
+            justifyContent={{ base: 'center', lg: 'flex-start' }}
+            flexDirection={'column'}
+            ml={{ base: '0%', lg: '2%' }}
+            pl={{ base: '100px', lg: '' }}
           >
-            <LinkBox as='article' maxW='sm' p='5'  borderWidth='1px' rounded='md' _hover={{
-              borderColor:"black"
-            }} >
-            <LinkOverlay href='#'>
-    
-   
-            <Image src={val.image}/>
-          
-            <Text textColor={"#090A0A"}>{val.desc}</Text>
-            <Text textColor={"#090A0A"}>{val.desc2}</Text>
-            <Text  textColor={"gray.400"}>{val.date}</Text>
-            </LinkOverlay>
+            <LinkBox
+              as='article'
+              maxW='sm'
+              p='5'
+              borderWidth='1px'
+              rounded='md'
+              _hover={{
+                borderColor: 'black'
+              }}
+            >
+              <LinkOverlay href='#'>
+                <Image src={val.image} />
+
+                <Text textColor={'#090A0A'}>{val.desc}</Text>
+                <Text textColor={'#090A0A'}>{val.desc2}</Text>
+                <Text textColor={'gray.400'}>{val.date}</Text>
+              </LinkOverlay>
             </LinkBox>
           </Flex>
         ))}
