@@ -17,8 +17,41 @@ import { PhoneIcon, CheckIcon, SearchIcon } from '@chakra-ui/icons'
 import TopNews from '../src/components/TopNews'
 import React, { useEffect, useState } from 'react'
 import { Route, Routes } from 'react-router'
+import Data from '../src/components/Data/mockData.json'
+import { useStorken } from '../data/Storken/data'
 
+export var dataArray = new Array<string>()
 const Home: NextPage = () => {
+  const [GlobalData, setGlobalData] = useStorken('getData')
+  const [searchData, setSearchData] = useState<string>('')
+
+  const getData = Data[0].data
+
+  const [inputText, setInputText] = useState('')
+  let inputHandler = (e: any) => {
+    //convert input text to lower case
+    var lowerCase = e.target.value.toLowerCase()
+    setInputText(lowerCase)
+    console.log(inputText)
+  }
+
+  const filteredData = getData.filter(el => {
+    let elItem: string = el[1].toLowerCase()
+    if (inputText === '') {
+      //if query is empty
+      return elItem
+    } else if (elItem.toLowerCase().includes(inputText.toLowerCase())) {
+      //returns filtered array
+      return elItem
+    }
+  })
+  const handleAdd = () => {
+    setGlobalData(inputText)
+    console.log('Input text', inputText)
+
+    console.log('global data', GlobalData)
+  }
+
   return (
     <>
       <Flex
@@ -55,6 +88,7 @@ const Home: NextPage = () => {
               <SearchIcon color={'gray.300'} mt='2' />
             </InputLeftElement>
             <Input
+              onChange={inputHandler}
               w={{ base: '300px', lg: '640px' }}
               placeholder='Search'
               fontSize={'10pt'}
@@ -77,11 +111,59 @@ const Home: NextPage = () => {
           </InputGroup>
           <Button ml={'-10px'}>
             <Text paddingX='40px' paddingY={'12px'}>
-              Search
+              Search {searchData}
             </Text>
           </Button>
         </Flex>
       </Flex>
+      <Flex
+        w={'100%'}
+        alignItems={'center'}
+        display={'flex'}
+        justifyContent={'center'}
+      >
+        <Flex
+          w={'40%'}
+          style={{
+            border: '2px #484848 solid',
+            borderRadius: '24px'
+          }}
+          h={'40vh'}
+          flexDirection={'column'}
+          gap={2}
+          overflowY={'auto'}
+          padding='16px'
+        >
+          {filteredData.map((item: any) => (
+            <Link href='' key={item}>
+              <Flex w={'100%'} flexDirection='row'>
+                <Flex w={'10%'}>
+                  <Image
+                    src='location.png'
+                    w='18px'
+                    h='22px'
+                    ml='10px'
+                    alignSelf='center'
+                  />
+                </Flex>
+                <Flex w={'80%'} flexDir={'column'} mb='20px'>
+                  <Text fontSize={20} color={'black'}>
+                    {item[1]}
+                  </Text>
+                  <Text fontSize={20} color={'#72777A'}>
+                    {item[4]}
+                  </Text>
+                </Flex>
+              </Flex>
+            </Link>
+          ))}
+        </Flex>
+      </Flex>
+
+      <Link href='/searchPage' onClick={() => handleAdd()}>
+        {' '}
+        BUrada ara
+      </Link>
 
       <TopNews />
     </>

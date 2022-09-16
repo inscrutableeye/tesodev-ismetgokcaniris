@@ -17,6 +17,7 @@
     "@fontsource/raleway": "^4.5.10",
     "@types/react-slick": "^0.23.10",
     "axios": "^0.27.2",
+    "chakra-paginator": "^0.7.3",
     "chakra-ui-autocomplete": "^1.4.5",
     "firebase": "^9.9.4",
     "framer-motion": "^7.3.2",
@@ -25,7 +26,8 @@
     "react-dom": "18.2.0",
     "react-icons": "^4.4.0",
     "react-router-dom": "^6.4.0",
-    "react-slick": "^0.29.0"
+    "react-slick": "^0.29.0",
+    "storken": "^2.1.0-beta.8"
   },
   "devDependencies": {
     "@types/node": "18.7.16",
