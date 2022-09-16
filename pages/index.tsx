@@ -10,8 +10,10 @@ import {
   useDisclosure,
   Collapse,
   Link,
-  LinkOverlay
+  LinkOverlay,
+  LinkBox
 } from '@chakra-ui/react'
+
 import { NextPage } from 'next'
 import { PhoneIcon, CheckIcon, SearchIcon } from '@chakra-ui/icons'
 import TopNews from '../src/components/TopNews'
@@ -157,13 +159,24 @@ const Home: NextPage = () => {
               </Flex>
             </Link>
           ))}
+          <Flex>
+            <LinkBox
+              as='article'
+              maxW='sm'
+              p='5'
+              borderWidth='1px'
+              rounded='md'
+              _hover={{
+                borderColor: 'black'
+              }}
+            >
+              <LinkOverlay href='/searchPage' onClick={() => handleAdd()}>
+                BUrada ara
+              </LinkOverlay>
+            </LinkBox>
+          </Flex>
         </Flex>
       </Flex>
-
-      <Link href='/searchPage' onClick={() => handleAdd()}>
-        {' '}
-        BUrada ara
-      </Link>
 
       <TopNews />
     </>
