@@ -92,24 +92,48 @@ const index = () => {
         </Flex>
       </Flex>
 
-      <Flex flexDirection='column' alignItems='center' justifyContent='center'>
-        {filteredData.map((item: any) => (
-          <Link href='' key={item}>
-            <Flex w={'100%'} bgColor={'blue'}>
-              <Flex w={'10%'}></Flex>
-              <Flex w={'80%'} flexDir={'column'}>
-                <Text fontSize={20} color={'black'}>
+      {filteredData.map((item: any) => (
+        <Link href='' key={item} display='flex' justifyContent={'space-around'}>
+          <Flex flexDirection='column' w='600px'>
+            <Flex flexDirection={'row'} gap='100'>
+              <Image src='location.png' w='18px' h='22px' ml='10px' />
+
+              <Flex flexDirection={'column'} w={'80%'} alignItems='start'>
+                <Text
+                  color={'black'}
+                  textAlign='start'
+                  fontStyle='normal'
+                  fontWeight='400'
+                  fontSize='16px'
+                  lineHeight='20px'
+                >
                   {item[1]}
                 </Text>
-                <Text fontSize={20} color={'black'}>
+                <Text
+                  color={'#72777A'}
+                  textAlign='start'
+                  fontStyle='normal'
+                  fontWeight='400'
+                  fontSize='14px'
+                  lineHeight='20px'
+                >
                   {item[4]}
                 </Text>
               </Flex>
+              <Text
+                textAlign='start'
+                fontStyle='normal'
+                fontWeight='400'
+                fontSize='16px'
+                lineHeight='20px'
+                color={'#484848'}
+              >
+                {item[3]}
+              </Text>
             </Flex>
-          </Link>
-        ))}
-        <Divider orientation='vertical' />
-      </Flex>
+          </Flex>
+        </Link>
+      ))}
     </Flex>
   )
 }
