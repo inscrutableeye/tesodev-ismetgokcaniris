@@ -15,6 +15,9 @@
     "@emotion/styled": "^11.10.4",
     "@fontsource/open-sans": "^4.5.11",
     "@fontsource/raleway": "^4.5.10",
+    "@fortawesome/fontawesome-svg-core": "^6.2.0",
+    "@fortawesome/free-solid-svg-icons": "^6.2.0",
+    "@fortawesome/react-fontawesome": "^0.2.0",
     "@types/react-slick": "^0.23.10",
     "axios": "^0.27.2",
     "chakra-paginator": "^0.7.3",
@@ -27,6 +30,7 @@
     "react-icons": "^4.4.0",
     "react-router-dom": "^6.4.0",
     "react-slick": "^0.29.0",
+    "rsuite": "^5.18.1",
     "storken": "^2.1.0-beta.8"
   },
   "devDependencies": {

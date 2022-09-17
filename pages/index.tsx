@@ -21,6 +21,7 @@ import React, { useEffect, useState } from 'react'
 import { Route, Routes } from 'react-router'
 import Data from '../src/components/Data/mockData.json'
 import { useStorken } from '../data/Storken/data'
+import Footer from '../src/components/Footer/Footer'
 
 export var dataArray = new Array<string>()
 const Home: NextPage = () => {
@@ -159,7 +160,7 @@ const Home: NextPage = () => {
               </Flex>
             </Link>
           ))}
-          <Flex>
+          <Flex alignItems={"center"} justifyContent="center">
             <LinkBox
               as='article'
               maxW='sm'
@@ -171,7 +172,16 @@ const Home: NextPage = () => {
               }}
             >
               <LinkOverlay href='/searchPage' onClick={() => handleAdd()}>
-                BUrada ara
+                <Text
+                fontStyle= "normal"
+                fontWeight= "700"
+                fontSize= "16px"
+                lineHeight= "24px"
+                color={"#090A0A"}
+            
+                >
+                    Show more...
+                </Text>
               </LinkOverlay>
             </LinkBox>
           </Flex>
@@ -179,6 +189,7 @@ const Home: NextPage = () => {
       </Flex>
 
       <TopNews />
+      <Footer/>
     </>
   )
 }
