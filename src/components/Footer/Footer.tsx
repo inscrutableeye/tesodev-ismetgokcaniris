@@ -1,5 +1,6 @@
 import { Flex , Image, Text } from '@chakra-ui/react';
 import React from 'react';
+import Mapx from '../Map/Mapx';
 
 
 
@@ -14,7 +15,7 @@ const Footer:React.FC = () => {
                 <Text pt="30px">Email: bilgi@tesodev.com</Text>
                 </Flex>
 
-                {/* <Map/> */}
+            <Mapx/>
             </Flex>
         </Flex>
     )
