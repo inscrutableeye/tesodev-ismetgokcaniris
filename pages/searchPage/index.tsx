@@ -1,4 +1,6 @@
-import { SearchIcon } from '@chakra-ui/icons'
+/* eslint-disable react-hooks/exhaustive-deps */
+/* eslint-disable react-hooks/rules-of-hooks */
+import { ChevronDownIcon, SearchIcon } from '@chakra-ui/icons'
 import {
   Flex,
   Link,
@@ -9,13 +11,19 @@ import {
   InputLeftElement,
   Button,
   Divider,
-  Select
+  Select,
+  Container,
+  ButtonProps,
+  Menu,
+  MenuButton,
+  MenuItem,
+  MenuList
 } from '@chakra-ui/react'
-import React from 'react'
-
+import react, {useState, useEffect, ChangeEvent } from "react"
 import Data from '../../src/components/Data/mockData.json'
 import { useStorken } from '../../data/Storken/data'
-
+import { Paginator, Previous, PageGroup, Next, usePaginator, generatePages, Page } from 'chakra-paginator'
+import { globalAgent } from 'http'
 const index = () => {
   // eslint-disable-next-line react-hooks/rules-of-hooks
   const [globalData, setGlobalData] = useStorken<string>('getData')
@@ -33,8 +41,76 @@ const index = () => {
 
     return elItem
   })
-
+ const dataFunnction = async (pageSize: number, offset: number)=> {
+   await fetch(
+  globalData,
+  {pageSize},
+  {offset},
+  ).then((res) => res.json());
+}
+const [datass, setDatas] = useState<any[]>(filteredData);
+   const baseStyles: ButtonProps = {
+    w: 10,
+    fontSize: "sm",
+    color: "black",
+    
+  
+  };
+  const normalStyles: ButtonProps = {
+    ...baseStyles,
+    _hover: {
+      bg: "#204080",
+      color: "white"
+    },
+    bg: "white"
+  };
+  const activeStyles: ButtonProps = {
+    ...baseStyles,
+    _hover: {
+      bg: "#204080"
+    },
+    bg: "#204080",
+    color: "white"
+  };
+  const separatorStyles: ButtonProps = {
+    w: 10,
+    bg: "green.200"
+  };
+  // eslint-disable-line react-hooks/rules-of-hooks
+  const [dataTotal, setDataTotal] = useState<number | undefined>(
+    undefined
+  );
+  // eslint-disable-line react-hooks/rules-of-hooks
+  const {  pagesQuantity,currentPage, setCurrentPage ,   pageSize, offset,
+    setPageSize } = usePaginator({
+    total:20,
+    initialState: {  pageSize: 5, currentPage: 1 }
+  });
+  const handlePageChange = (nextPage: number) => {
+    // -> request new data using the page number
+    setCurrentPage(nextPage);
+    console.log("request new data with ->", nextPage);
+  };
+  const handlePageSizeChange = (event: ChangeEvent<HTMLSelectElement>) => {
+    const pageSize = Number(event.target.value);
+    setPageSize(pageSize);
+  };
+  useEffect(() => {
+  dataFunnction(pageSize, offset).then((datass) => {
+    setDataTotal(datass.count);
+    setDatas(datass.result)
+  });
+  }, []);
+  const outerLimit = 2;
+  const innerLimit = 2;
   console.log('data burada', globalData)
+
+  const  Desc = () =>{
+const as =getData.sort()
+
+console.log(as)
+
+  }
   return (
     <Flex flexDirection='column'>
       <Flex
@@ -50,13 +126,13 @@ const index = () => {
           ml='37px'
           mr='34px'
         />
-        <Flex flexDirection='row'>
-          <InputGroup mt='60px'>
+        <Flex flexDirection='row' >
+          <InputGroup mt='60px' ml={{md:"", xl:"-25%"}} >
             <InputLeftElement color='gray.400' pointerEvents='none'>
               <SearchIcon color={'gray.300'} mt='2' />
             </InputLeftElement>
-            <Input
-              w={{ base: '300px', lg: '640px' }}
+            <Input           
+              w={{ base: '250px', lg: '640px' }}
               placeholder='Search'
               fontSize={'10pt'}
               _placeholder={{ color: 'gray.500' }}
@@ -76,7 +152,7 @@ const index = () => {
               bg='#FFFFFF'
             />
           </InputGroup>
-          <Button ml={'-10px'}>
+          <Button  ml={{md:"-10%", xl:"-40%"}}>
             <Text paddingX='40px' paddingY={'12px'}>
               Search
             </Text>
@@ -91,13 +167,17 @@ const index = () => {
           </Flex>
         </Flex>
       </Flex>
-
-      {filteredData.map((item: any) => (
-        <Link href='' key={item} display='flex' justifyContent={'space-around'}>
-          <Flex flexDirection='column' w='600px'>
+      <Flex flexDirection={"row"}>
+     
+<Flex  flexDirection="column" w={"750px"} ml="25%" borderRadius={"24px"}  justifyContent={"center"}    >
+      {datass?.map((item: any) => (
+        <Link  href='' key={item} display='flex'    borderRadius="24px" justifyContent={'space-around'} _hover={{
+          bg:"rgba(79, 117, 194, 0.21);"
+        }}
+        >
+          <Flex  flexDirection='column' w='600px'  padding={30}>
             <Flex flexDirection={'row'} gap='100'>
               <Image src='location.png' w='18px' h='22px' ml='10px' />
-
               <Flex flexDirection={'column'} w={'80%'} alignItems='start'>
                 <Text
                   color={'black'}
@@ -108,7 +188,7 @@ const index = () => {
                   lineHeight='20px'
                 >
                   {item[1]}
-                </Text>
+                </Text>  
                 <Text
                   color={'#72777A'}
                   textAlign='start'
@@ -119,6 +199,7 @@ const index = () => {
                 >
                   {item[4]}
                 </Text>
+                <Divider orientation='vertical'/>
               </Flex>
               <Text
                 textAlign='start'
@@ -132,8 +213,53 @@ const index = () => {
               </Text>
             </Flex>
           </Flex>
-        </Link>
-      ))}
+          <Divider orientation='vertical'/>
+        </Link>  
+      ))}   
+    </Flex>
+    <Menu>
+  {({ isOpen }) => (
+    <>
+      <MenuButton bg={"white"} _hover={{
+      
+        bg:"#B3B3B3",
+        textColor:"white"
+      }}  isActive={isOpen} as={Button} textColor="black" rightIcon={<ChevronDownIcon />}>
+        {isOpen ? 'Close' : 'Order By'}
+      </MenuButton>
+      <MenuList bg={"white"}>
+        <MenuItem textColor={"black"} borderRadius="10px"  _hover={{
+          bg:"#B3B3B3"
+        }} onClick={Desc}>Name ascending</MenuItem>
+        <MenuItem textColor={"black"} borderRadius="10px" _hover={{
+          bg:"#B3B3B3"
+        }}  >Year ascending</MenuItem>
+      </MenuList>
+    </>
+  )}
+</Menu>
+    </Flex>
+    <Paginator
+       pagesQuantity={pagesQuantity}
+        currentPage={currentPage}
+        onPageChange={handlePageChange}
+        innerLimit={innerLimit}
+        outerLimit={outerLimit}
+        normalStyles={normalStyles}
+        separatorStyles={separatorStyles}
+        activeStyles={activeStyles}
+      >
+        <Container   w="full" p={4} ml={"15%"} display="flex" flexDirection={"row"}>
+          <Previous>
+            Prev        
+          </Previous>
+          <PageGroup isInline align="center" />
+          <Next>
+            Next
+            {/* Or an icon from `react-icons` */}
+          </Next>
+        </Container>
+      </Paginator>
     </Flex>
   )
 }
