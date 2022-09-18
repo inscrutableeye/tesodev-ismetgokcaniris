@@ -28,6 +28,8 @@ const index = () => {
   // eslint-disable-next-line react-hooks/rules-of-hooks
   const [globalData, setGlobalData] = useStorken<string>('getData')
   const getData = Data[0].data
+  const nameSort = Data[0].data.sort()
+
   const filteredData = getData.filter(el => {
     let elItem: string = el[1].toLowerCase()
     if (globalData === '') {
@@ -106,9 +108,13 @@ const [datass, setDatas] = useState<any[]>(filteredData);
   console.log('data burada', globalData)
 
   const  Desc = () =>{
-const as =getData.sort()
+nameSort
 
-console.log(as)
+console.log(nameSort)
+
+  }
+  const dateDesc = () =>{
+dateSort
 
   }
   return (
@@ -171,7 +177,7 @@ console.log(as)
      
 <Flex  flexDirection="column" w={"750px"} ml="25%" borderRadius={"24px"}  justifyContent={"center"}    >
       {datass?.map((item: any) => (
-        <Link  href='' key={item} display='flex'    borderRadius="24px" justifyContent={'space-around'} _hover={{
+        <Link  href='' key={item} display='flex' onChange={Desc}   borderRadius="24px" justifyContent={'space-around'} _hover={{
           bg:"rgba(79, 117, 194, 0.21);"
         }}
         >
@@ -227,12 +233,13 @@ console.log(as)
       }}  isActive={isOpen} as={Button} textColor="black" rightIcon={<ChevronDownIcon />}>
         {isOpen ? 'Close' : 'Order By'}
       </MenuButton>
-      <MenuList bg={"white"}>
-        <MenuItem textColor={"black"} borderRadius="10px"  _hover={{
-          bg:"#B3B3B3"
+      <MenuList bg={"white"} padding="10px"> 
+        <MenuItem fontWeight={"500"}  fontSize="14px" lineHeight={"16px"} textColor={"black"} borderRadius="10px"  _hover={{
+          bg:"#B3B3B3",textColor:"white"
         }} onClick={Desc}>Name ascending</MenuItem>
-        <MenuItem textColor={"black"} borderRadius="10px" _hover={{
-          bg:"#B3B3B3"
+        <MenuItem fontWeight={"500"}  fontSize="14px" lineHeight={"16px"} textColor={"black"} borderRadius="10px" _hover={{
+          bg:"#B3B3B3",
+          textColor:"white"
         }}  >Year ascending</MenuItem>
       </MenuList>
     </>
