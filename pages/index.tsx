@@ -36,7 +36,6 @@ const Home: NextPage = () => {
     var lowerCase = e.target.value.toLowerCase()
     setInputText(lowerCase)
     console.log(inputText)
-
   }
 
   const filteredData = getData.filter(el => {
@@ -54,7 +53,6 @@ const Home: NextPage = () => {
     console.log('Input text', inputText)
 
     console.log('global data', GlobalData)
-   
   }
 
   return (
@@ -84,8 +82,8 @@ const Home: NextPage = () => {
         <Flex
           alignItems={'center'}
           justifyContent={{ base: 'center', lg: 'space-around' }}
-          flexDirection={{base:"column", md:'row'}}
-          mt={{base:"",md:'-50px'}}
+          flexDirection={{ base: 'column', md: 'row' }}
+          mt={{ base: '', md: '-50px' }}
           ml={{ base: '10%', lg: '15%' }}
         >
           <InputGroup>
@@ -93,7 +91,7 @@ const Home: NextPage = () => {
               <SearchIcon color={'gray.300'} mt='2' />
             </InputLeftElement>
             <Input
-            value={inputText}
+              value={inputText}
               onChange={inputHandler}
               w={{ base: '300px', lg: '640px' }}
               placeholder='Search'
@@ -129,7 +127,7 @@ const Home: NextPage = () => {
         justifyContent={'center'}
       >
         <Flex
-          w={{base:"", md:'40%'}}
+          w={{ base: '', md: '40%' }}
           style={{
             border: '2px #484848 solid',
             borderRadius: '24px'
@@ -138,7 +136,7 @@ const Home: NextPage = () => {
           flexDirection={'column'}
           gap={2}
           overflowY={'auto'}
-          padding={{base:"5px",md:'16px'}}
+          padding={{ base: '5px', md: '16px' }}
         >
           {filteredData.map((item: any) => (
             <Link href='' key={item}>
@@ -163,7 +161,7 @@ const Home: NextPage = () => {
               </Flex>
             </Link>
           ))}
-          <Flex alignItems={"center"} justifyContent="center">
+          <Flex alignItems={'center'} justifyContent='center'>
             <LinkBox
               as='article'
               maxW='sm'
@@ -176,14 +174,13 @@ const Home: NextPage = () => {
             >
               <LinkOverlay href='/searchPage' onClick={() => handleAdd()}>
                 <Text
-                fontStyle= "normal"
-                fontWeight= "700"
-                fontSize= "16px"
-                lineHeight= "24px"
-                color={"#090A0A"}
-            
+                  fontStyle='normal'
+                  fontWeight='700'
+                  fontSize='16px'
+                  lineHeight='24px'
+                  color={'#090A0A'}
                 >
-                    Show more...
+                  Show more...
                 </Text>
               </LinkOverlay>
             </LinkBox>
@@ -192,7 +189,7 @@ const Home: NextPage = () => {
       </Flex>
 
       <TopNews />
-      <Footer/>
+      <Footer />
     </>
   )
 }
