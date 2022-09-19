@@ -37,24 +37,24 @@ const index = () => {
   const [globalData, setGlobalData] = useStorken<string>('getData')
   const getData = Data[0].data
   const nameSort = Data[0].data.sort()
-
+  const [inputTexts, setInputTexts] = useStorken<string>('inputText')
+  let inputHandler = (e: any) => {
+    //convert input text to lower case
+    var lowerCase = e.target.value.toLowerCase()
+    setInputTexts(lowerCase)
+    console.log(inputTexts)
+  }
   const filteredData = getData.filter(el => {
     let elItem: string = el[1].toLowerCase()
-    if (globalData === '') {
+    if (inputTexts === '') {
       //if query is empty
-      return elItem
-    } else if (elItem.toLowerCase().includes(globalData.toLowerCase())) {
+    } else if (elItem.toLowerCase().includes(inputTexts.toLowerCase())) {
       //returns filtered array
-
       return elItem
     }
-
-    return elItem
   })
-  const [searchData, setSearchData] = useState<string>('')
-  const dataFunnction = async (pageSize: number, offset: number) => {
-    await fetch(globalData, { pageSize }, { offset }).then(res => res.json())
-  }
+  const [searchData, setSearchData] = useStorken<string>('inputText')
+
   const [datass, setDatas] = useState<any[]>(filteredData)
   const baseStyles: ButtonProps = {
     w: 10,
@@ -105,12 +105,7 @@ const index = () => {
     const pageSize = Number(event.target.value)
     setPageSize(pageSize)
   }
-  useEffect(() => {
-    dataFunnction(pageSize, offset).then(datass => {
-      setDataTotal(datass.count)
-      setDatas(datass.result)
-    })
-  }, [])
+
   const outerLimit = 2
   const innerLimit = 2
   console.log('data burada', globalData)
@@ -120,7 +115,12 @@ const index = () => {
 
     console.log(nameSort)
   }
+  const handleAdd = () => {
+    setInputTexts(inputTexts)
+    console.log('Input text', inputTexts)
 
+    console.log('global data', globalData)
+  }
   return (
     <Flex flexDirection='column'>
       <Flex
@@ -135,6 +135,7 @@ const index = () => {
           h='63px'
           ml='37px'
           mr='34px'
+          alt={'ımage'}
         />
         <Flex flexDirection='row' ml={{ base: '10%', md: '30%' }}>
           <InputGroup mt='60px' ml={{ md: '', xl: '-25%' }}>
@@ -142,6 +143,8 @@ const index = () => {
               <SearchIcon color={'gray.300'} mt='2' />
             </InputLeftElement>
             <Input
+              value={inputTexts}
+              onChange={e => setInputTexts(e.target.value)}
               w={{ base: '250px', lg: '640px' }}
               placeholder='Search'
               fontSize={'10pt'}
@@ -164,7 +167,7 @@ const index = () => {
           </InputGroup>
           <Button ml={{ md: '-10%', xl: '-40%' }}>
             <Text paddingX='40px' paddingY={'12px'}>
-              Search {searchData}
+              Search
             </Text>
           </Button>
           <Flex
@@ -185,12 +188,12 @@ const index = () => {
           borderRadius={'24px'}
           justifyContent={'center'}
         >
-          {datass?.map((item: any) => (
+          {filteredData.map((item: any) => (
             <Link
               href=''
               key={item}
               display='flex'
-              onChange={Desc}
+              onChange={handleAdd}
               borderRadius='24px'
               justifyContent={'space-around'}
               _hover={{

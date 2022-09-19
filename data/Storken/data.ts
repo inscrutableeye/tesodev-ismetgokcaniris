@@ -8,7 +8,7 @@ export const {
 } = createStorken({
   initialValues: {
     getData: "asdf" as string,
-    
+    inputText: "",
   },
 });
 export const getStorken = Storken;

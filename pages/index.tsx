@@ -26,31 +26,30 @@ import Footer from '../src/components/Footer/Footer'
 export var dataArray = new Array<string>()
 const Home: NextPage = () => {
   const [GlobalData, setGlobalData] = useStorken('getData')
-  const [searchData, setSearchData] = useState<string>('')
+  const [searchData, setSearchData] = useStorken<string>('inputText')
 
   const getData = Data[0].data
 
-  const [inputText, setInputText] = useState('')
+  const [inputTexts, setInputTexts] = useStorken<string>('inputText')
   let inputHandler = (e: any) => {
     //convert input text to lower case
     var lowerCase = e.target.value.toLowerCase()
-    setInputText(lowerCase)
-    console.log(inputText)
+    setInputTexts(lowerCase)
+    console.log(inputTexts)
   }
 
   const filteredData = getData.filter(el => {
     let elItem: string = el[1].toLowerCase()
-    if (inputText === '') {
+    if (inputTexts === '') {
       //if query is empty
-      return elItem
-    } else if (elItem.toLowerCase().includes(inputText.toLowerCase())) {
+    } else if (elItem.toLowerCase().includes(inputTexts.toLowerCase())) {
       //returns filtered array
       return elItem
     }
   })
   const handleAdd = () => {
-    setGlobalData(inputText)
-    console.log('Input text', inputText)
+    setInputTexts(inputTexts)
+    console.log('Input text', inputTexts)
 
     console.log('global data', GlobalData)
   }
@@ -91,8 +90,8 @@ const Home: NextPage = () => {
               <SearchIcon color={'gray.300'} mt='2' />
             </InputLeftElement>
             <Input
-              value={inputText}
-              onChange={inputHandler}
+              value={inputTexts}
+              onChange={e => setInputTexts(e.target.value)}
               w={{ base: '300px', lg: '640px' }}
               placeholder='Search'
               fontSize={'10pt'}
@@ -115,7 +114,7 @@ const Home: NextPage = () => {
           </InputGroup>
           <Button ml={'-10px'}>
             <Text paddingX='40px' paddingY={'12px'}>
-              Search {searchData}
+              Search
             </Text>
           </Button>
         </Flex>
