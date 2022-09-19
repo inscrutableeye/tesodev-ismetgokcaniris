@@ -124,7 +124,7 @@ export default function Carousel () {
         flexDirection={'row'}
         justifyContent={{ base: 'center', lg: 'space-between' }}
         mt={'-5%'}
-        ml={{ base: '100px', lg: '0' }}
+        ml={{ base: '25px', lg: '0' }}
       >
         <link
           rel='stylesheet'
@@ -169,8 +169,8 @@ export default function Carousel () {
             alignItems='center'
             justifyContent={{ base: 'center', lg: 'flex-start' }}
             flexDirection={'column'}
-            ml={{ base: '0%', lg: '2%' }}
-            pl={{ base: '100px', lg: '' }}
+            ml={{ base: '-2', lg: '2%' }}
+            pl={{ base: '20px', lg: '100px' }}
           >
             <LinkBox
               as='article'

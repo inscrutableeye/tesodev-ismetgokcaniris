@@ -30,12 +30,15 @@ const index = () => {
   const getData = Data[0].data
   const nameSort = Data[0].data.sort()
 
+
+
+ 
   const filteredData = getData.filter(el => {
     let elItem: string = el[1].toLowerCase()
-    if (globalData === '') {
+    if (  globalData==="") {
       //if query is empty
       return elItem
-    } else if (elItem.toLowerCase().includes(globalData.toLowerCase())) {
+    } else if (elItem.toLowerCase().includes(globalData.toLowerCase()) ) {
       //returns filtered array
 
       return elItem
@@ -43,6 +46,7 @@ const index = () => {
 
     return elItem
   })
+  const [searchData, setSearchData] = useState<string>('')
  const dataFunnction = async (pageSize: number, offset: number)=> {
    await fetch(
   globalData,
@@ -58,6 +62,7 @@ const [datass, setDatas] = useState<any[]>(filteredData);
     
   
   };
+
   const normalStyles: ButtonProps = {
     ...baseStyles,
     _hover: {
@@ -113,10 +118,7 @@ nameSort
 console.log(nameSort)
 
   }
-  const dateDesc = () =>{
-dateSort
 
-  }
   return (
     <Flex flexDirection='column'>
       <Flex
@@ -137,7 +139,8 @@ dateSort
             <InputLeftElement color='gray.400' pointerEvents='none'>
               <SearchIcon color={'gray.300'} mt='2' />
             </InputLeftElement>
-            <Input           
+            <Input  
+        
               w={{ base: '250px', lg: '640px' }}
               placeholder='Search'
               fontSize={'10pt'}
@@ -158,9 +161,9 @@ dateSort
               bg='#FFFFFF'
             />
           </InputGroup>
-          <Button  ml={{md:"-10%", xl:"-40%"}}>
+          <Button   ml={{md:"-10%", xl:"-40%"}}>
             <Text paddingX='40px' paddingY={'12px'}>
-              Search
+              Search {searchData}
             </Text>
           </Button>
           <Flex
@@ -168,14 +171,14 @@ dateSort
             justifyContent={{ base: 'center', lg: 'flex-end' }}
           >
             <Link href='/Record'>
-              <Button>Add New Record</Button>
+              <Button  >Add New Record </Button>
             </Link>
           </Flex>
         </Flex>
       </Flex>
       <Flex flexDirection={"row"}>
      
-<Flex  flexDirection="column" w={"750px"} ml="25%" borderRadius={"24px"}  justifyContent={"center"}    >
+<Flex  flexDirection="column" w={ "750px"} ml={"25%"} borderRadius={"24px"}  justifyContent={"center"}    >
       {datass?.map((item: any) => (
         <Link  href='' key={item} display='flex' onChange={Desc}   borderRadius="24px" justifyContent={'space-around'} _hover={{
           bg:"rgba(79, 117, 194, 0.21);"

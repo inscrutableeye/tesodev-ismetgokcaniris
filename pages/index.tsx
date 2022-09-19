@@ -36,6 +36,7 @@ const Home: NextPage = () => {
     var lowerCase = e.target.value.toLowerCase()
     setInputText(lowerCase)
     console.log(inputText)
+
   }
 
   const filteredData = getData.filter(el => {
@@ -53,6 +54,7 @@ const Home: NextPage = () => {
     console.log('Input text', inputText)
 
     console.log('global data', GlobalData)
+   
   }
 
   return (
@@ -82,15 +84,16 @@ const Home: NextPage = () => {
         <Flex
           alignItems={'center'}
           justifyContent={{ base: 'center', lg: 'space-around' }}
-          flexDirection={'row'}
-          mt={'-50px'}
-          ml={{ base: '40%', lg: '15%' }}
+          flexDirection={{base:"column", md:'row'}}
+          mt={{base:"",md:'-50px'}}
+          ml={{ base: '10%', lg: '15%' }}
         >
           <InputGroup>
             <InputLeftElement color='gray.400' pointerEvents='none'>
               <SearchIcon color={'gray.300'} mt='2' />
             </InputLeftElement>
             <Input
+            value={inputText}
               onChange={inputHandler}
               w={{ base: '300px', lg: '640px' }}
               placeholder='Search'
@@ -126,7 +129,7 @@ const Home: NextPage = () => {
         justifyContent={'center'}
       >
         <Flex
-          w={'40%'}
+          w={{base:"", md:'40%'}}
           style={{
             border: '2px #484848 solid',
             borderRadius: '24px'
@@ -135,7 +138,7 @@ const Home: NextPage = () => {
           flexDirection={'column'}
           gap={2}
           overflowY={'auto'}
-          padding='16px'
+          padding={{base:"5px",md:'16px'}}
         >
           {filteredData.map((item: any) => (
             <Link href='' key={item}>
